@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
-
-  final List catName = [
+  List catName = [
     "Category",
     'Classes',
     'Free Course',
@@ -12,7 +11,56 @@ class HomeScreen extends StatelessWidget {
     'LeaderBoard',
   ];
 
-  final List<Color> catColor = [];
+  List<Color> catColor = [
+    const Color(0xFFFFCF2F),
+    const Color(0xFF6FE08D),
+    const Color(0xFF61BDFD),
+    const Color(0xFFFC7F7F),
+    const Color(0xFFCB84FB),
+    const Color(0xFF78E667),
+  ];
+
+  List<Icon> catIcons = [
+    const Icon(
+      Icons.category,
+      color: Colors.white,
+      size: 30,
+    ),
+    const Icon(
+      Icons.video_library,
+      color: Colors.white,
+      size: 30,
+    ),
+    const Icon(
+      Icons.assignment,
+      color: Colors.white,
+      size: 30,
+    ),
+    const Icon(
+      Icons.store,
+      color: Colors.white,
+      size: 30,
+    ),
+    const Icon(
+      Icons.play_circle_fill,
+      color: Colors.white,
+      size: 30,
+    ),
+    const Icon(
+      Icons.emoji_events,
+      color: Colors.white,
+      size: 30,
+    ),
+  ];
+
+  List imgList = [
+    'Flutter',
+    'React Native',
+    'Python',
+    'C#',
+  ];
+
+  HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +103,7 @@ class HomeScreen extends StatelessWidget {
                     bottom: 15,
                   ),
                   child: Text(
-                    'Hi, Programmer',
+                    'Hi, Hetkumar Prajapati',
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
@@ -96,6 +144,7 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               children: [
                 GridView.builder(
+                  itemCount: catName.length,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -103,12 +152,135 @@ class HomeScreen extends StatelessWidget {
                     childAspectRatio: 1.1,
                   ),
                   itemBuilder: (context, index) {
-                    return const Column();
+                    return Column(
+                      children: [
+                        Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            color: catColor[index],
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: catIcons[index],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          catName[index],
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black.withOpacity(0.7),
+                          ),
+                        )
+                      ],
+                    );
+                  },
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Courses',
+                      style: TextStyle(
+                        fontSize: 23,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Text(
+                      'See All',
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF674AEF)),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                GridView.builder(
+                  itemCount: imgList.length,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio:
+                        (MediaQuery.of(context).size.height - 50 - 25) /
+                            (4 * 240),
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                  ),
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {},
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 20,
+                          horizontal: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: const Color(0xFFF5F3FF),
+                        ),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(10),
+                              child: Image.asset(
+                                'assets/images/${imgList[index]}.png',
+                                width: 100,
+                                height: 100,
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              imgList[index],
+                              style: TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.black.withOpacity(0.6),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              '55 Videos',
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black.withOpacity(0.5)),
+                            )
+                          ],
+                        ),
+                      ),
+                    );
                   },
                 ),
               ],
             ),
           )
+        ],
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        showUnselectedLabels: true,
+        iconSize: 32,
+        selectedItemColor: const Color(0xFF674AEF),
+        selectedFontSize: 18,
+        unselectedItemColor: Colors.grey,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.assignment), label: 'Courses'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite), label: 'Wishlist'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Account'),
         ],
       ),
     );
