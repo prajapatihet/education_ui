@@ -1,8 +1,8 @@
+import 'package:education_ui/screens/course.dart';
 import 'package:flutter/material.dart';
 
-// ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
-  List catName = [
+  final List catName = [
     "Category",
     'Classes',
     'Free Course',
@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
     'LeaderBoard',
   ];
 
-  List<Color> catColor = [
+  final List<Color> catColor = [
     const Color(0xFFFFCF2F),
     const Color(0xFF6FE08D),
     const Color(0xFF61BDFD),
@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
     const Color(0xFF78E667),
   ];
 
-  List<Icon> catIcons = [
+  final List<Icon> catIcons = [
     const Icon(
       Icons.category,
       color: Colors.white,
@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
     ),
   ];
 
-  List imgList = [
+  final List imgList = [
     'Flutter',
     'React Native',
     'Python',
@@ -216,7 +216,15 @@ class HomeScreen extends StatelessWidget {
                   ),
                   itemBuilder: (context, index) {
                     return InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) =>
+                                CourseScreen(imgList[index]),
+                          ),
+                        );
+                      },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                           vertical: 20,
