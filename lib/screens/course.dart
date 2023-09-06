@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:education_ui/widgets/description_section.dart';
+import 'package:education_ui/widgets/video_section.dart';
 import 'package:flutter/material.dart';
 
 class CourseScreen extends StatefulWidget {
@@ -10,6 +11,7 @@ class CourseScreen extends StatefulWidget {
 }
 
 class _CourseScreenState extends State<CourseScreen> {
+  bool isVideosSection = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,10 +117,16 @@ class _CourseScreenState extends State<CourseScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Material(
-                    color: const Color(0xFF674AEF),
+                    color: isVideosSection
+                        ? const Color(0xFF674AEF)
+                        : const Color(0xFF674AEF).withOpacity(0.5),
                     borderRadius: BorderRadius.circular(10),
                     child: InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        setState(() {
+                          isVideosSection = true;
+                        });
+                      },
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             vertical: 15, horizontal: 35),
@@ -126,7 +134,32 @@ class _CourseScreenState extends State<CourseScreen> {
                           'Videos',
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 20,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Material(
+                    color: isVideosSection
+                        ? const Color(0xFF674AEF).withOpacity(0.5)
+                        : const Color(0xFF674AEF),
+                    borderRadius: BorderRadius.circular(10),
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          isVideosSection = false;
+                        });
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 15, horizontal: 35),
+                        child: const Text(
+                          'Description',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -136,6 +169,10 @@ class _CourseScreenState extends State<CourseScreen> {
                 ],
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            isVideosSection ? VideoSection() : DescriptionSection(),
           ],
         ),
       ),
