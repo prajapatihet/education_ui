@@ -172,7 +172,7 @@ class _CourseScreenState extends State<CourseScreen> {
             const SizedBox(
               height: 10,
             ),
-            isVideosSection ? VideoSection() : DescriptionSection(),
+            isVideosSection ? VideoSection() : const DescriptionSection(),
           ],
         ),
       ),
